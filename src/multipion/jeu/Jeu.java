@@ -213,7 +213,9 @@ public class Jeu{
 	public void jouerIA(Coordonnee coord){
 		fenetre.tourIA(false);
 		if(coord != null){
+			if(fin==false) {
 			this.deplacerPiece(coord.x, coord.y);
+			}
 		}else{
 			fenetre.repaint();
 		}
@@ -334,6 +336,7 @@ public class Jeu{
 	public int recherchePrerequis(Piece p, int x, int y){
 		int valeur = 1;
 		System.out.println(p);
+
 		if(p.getClass().equals(Pion.class)){
 			ArrayList<Pion> pions = plateau.getPions(p.getCouleur());
 			for(Pion a : pions){
@@ -351,6 +354,7 @@ public class Jeu{
 				}
 			}
 		}
+	
 		
 		
 		return valeur;
@@ -520,21 +524,6 @@ public class Jeu{
 		return this.iaThread2;
 	}
 	
-	/**
-	 * Getter pour savoir si le jeu est un serveur
-	 * @return boolean
-	 */
-	public boolean isServer(){
-		return estServeur;
-	}
-	
-	/**
-	 * Getter pour savoir si le jeu est en reseau
-	 * @return boolean
-	 */
-	public boolean isVsInternet(){
-		return this.vsInternet;
-	}
 	
 	/**
 	 * Stop les thread des IA
