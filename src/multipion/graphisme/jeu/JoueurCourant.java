@@ -2,6 +2,7 @@ package multipion.graphisme.jeu;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -52,6 +53,8 @@ public class JoueurCourant extends JPanel{
 		joueurNoir.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
 		
 		JLabel textTour = new JLabel("TOUR", JLabel.CENTER);
+		textTour.setForeground(new Color(230,230,230));
+		//textTour.setFont(new Font("Arial", Font.PLAIN, 20));
 		textTour.setPreferredSize(new Dimension(Case.CASE_LENGTH * 2, Case.CASE_LENGTH));
 		
 		this.setLayout(new GridBagLayout());

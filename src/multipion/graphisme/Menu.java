@@ -17,15 +17,16 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.*;
 
 import multipion.MultiPion;
 import multipion.graphisme.jeu.Fenetre;
-
 /**
  * Menu du jeu d'echec
  * Acces au different mode de jeu
@@ -123,21 +124,34 @@ public class Menu extends JFrame implements ActionListener, MouseListener{
 	public void initFenetre(){
 		//Initialise les boutons
 		Dimension taille = new Dimension(150, 50);
-		unJoueur = new JButton("Un Joueur");
+		unJoueur = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"1joueur.png")));
 		unJoueur.setPreferredSize(taille);
 		unJoueur.addActionListener(this);
 		unJoueur.addMouseListener(this);
-		deuxJoueurs = new JButton("Deux Joueurs");
+		
+		deuxJoueurs = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"2joueur.png")));
 		deuxJoueurs.setPreferredSize(taille);
 		deuxJoueurs.addActionListener(this);
 		deuxJoueurs.addMouseListener(this);
-		aPropos = new JButton("A propos");
+		
+		aPropos = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"info.png")));
+		aPropos.setBorderPainted(false);
+		aPropos.setPreferredSize(new Dimension(45, 45));
 		aPropos.addActionListener(this);
-		quitter = new JButton("Quitter");
+		
+		quitter = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"quit.png")));
+		quitter.setPreferredSize(new Dimension(45, 45));
+		quitter.setBorderPainted(false);
 		quitter.addActionListener(this);
+		
 		dimgrille = new JTextField("3");
+		dimgrille.setBackground(new Color(53,56,74));
+		dimgrille.setFont(new Font("Arial", Font.PLAIN, 20));
+		dimgrille.setHorizontalAlignment(JTextField.CENTER);
+		dimgrille.setForeground(new Color(180,180,180));
 		dimgrille.setPreferredSize(taille);
-		iavsia = new JButton("IA vs IA");
+		
+		iavsia = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"ia.png")));
 		iavsia.setPreferredSize(taille);
 		iavsia.addMouseListener(this);
 		iavsia.addActionListener(this);
@@ -158,11 +172,14 @@ public class Menu extends JFrame implements ActionListener, MouseListener{
 		 
 		//Initialise le Jpanel principal
 		conteneur = new JPanel();
+		conteneur.setBackground(new Color(33,36,54));
 		conteneur.setLayout(new GridBagLayout());
 		this.setContentPane(conteneur);
 		
 		//Label
-		JLabel titre = new JLabel("JEU MULTIPION");
+		ImageIcon image = new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"Titre.png"));
+		JLabel titre = new JLabel(image);
+		titre.setPreferredSize(new Dimension(450, 80));
 		titre.setFont(new Font("Dialog", Font.BOLD,50));
 		titre.setHorizontalAlignment(JLabel.CENTER);
 		

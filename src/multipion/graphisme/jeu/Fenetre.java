@@ -1,5 +1,6 @@
 package multipion.graphisme.jeu;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -169,10 +170,12 @@ public class Fenetre extends JFrame implements ActionListener{
 		//Creation de tous les conteneurs
 		//Conteneur general de la fenetre
 		conteneurGeneral = new JPanel();
+		conteneurGeneral.setBackground(new Color(33,36,54));
 		conteneurGeneral.setPreferredSize(this.getPreferredSize());
 
 		//Affichage du joueur courant
 		joueurCourant = new JoueurCourant(this);
+		joueurCourant.setBackground(new Color(33,36,54));
 		joueurCourant.setPreferredSize(new Dimension(Case.CASE_LENGTH * 4, Case.CASE_LENGTH));
 		
 		//Grille du plateau de jeu
@@ -184,6 +187,7 @@ public class Fenetre extends JFrame implements ActionListener{
 		prisesBlanches = new PiecesPrisesJeu(jeu, true);
 		prisesBlanches.setPreferredSize(new Dimension(Case.CASE_LENGTH*2, Case.CASE_LENGTH*8));
 		JPanel blancPriseConteneur = new JPanel();
+		blancPriseConteneur.setBackground(new Color(200,200,200));
 		blancPriseConteneur.add(prisesBlanches);
 		blancPriseConteneur.setBorder(BorderFactory.createTitledBorder("Prises blanches"));
 		blancPriseConteneur.setPreferredSize(new Dimension(Case.CASE_LENGTH*2, Case.CASE_LENGTH*8));
@@ -192,6 +196,7 @@ public class Fenetre extends JFrame implements ActionListener{
 		prisesNoires = new PiecesPrisesJeu(jeu, false);
 		prisesNoires.setPreferredSize(new Dimension(Case.CASE_LENGTH*2, Case.CASE_LENGTH*8));
 		JPanel noirPriseConteneur = new JPanel();
+		noirPriseConteneur.setBackground(new Color(200,200,200));
 		noirPriseConteneur.add(prisesNoires);
 		noirPriseConteneur.setBorder(BorderFactory.createTitledBorder("Prises noires"));
 		noirPriseConteneur.setPreferredSize(new Dimension(Case.CASE_LENGTH*2, Case.CASE_LENGTH*8));
@@ -207,6 +212,7 @@ public class Fenetre extends JFrame implements ActionListener{
 
 		//Coords
 		coordAbscisse = new JPanel();
+		coordAbscisse.setBackground(new Color(33,36,54));
 		coordAbscisse.setLayout(new GridLayout(1, taillegrille));
 		
 		// Lettres definissant les coordonnée du plateau
@@ -231,15 +237,18 @@ public class Fenetre extends JFrame implements ActionListener{
 		// Créer les indications lettre du plateau
 		for(char i = 'A'; i <= lettre; i++){
 			JLabel c = new JLabel(i+"", JLabel.CENTER);
+			c.setForeground(new Color(220,220,220));
 			c.setPreferredSize(new Dimension(Case.CASE_LENGTH/taillegrille*8 , 9));
 			coordAbscisse.add(c);
 		}
 		coordOrdonnee = new JPanel();
+		coordOrdonnee.setBackground(new Color(33,36,54));
 		coordOrdonnee.setLayout(new GridLayout(taillegrille, 1));
 		
 		// Créer les indications chiffres du plateau
 		for(int i = taillegrille; i >= 1; i--){
 			JLabel c = new JLabel(i+"");
+			c.setForeground(new Color(220,220,220));
 			c.setPreferredSize(new Dimension(9, Case.CASE_LENGTH/taillegrille*8 ));
 			coordOrdonnee.add(c);
 		}
