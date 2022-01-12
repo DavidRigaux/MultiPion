@@ -20,6 +20,9 @@ import javax.swing.JToggleButton;
 
 import multipion.MultiPion;
 import multipion.graphisme.jeu.Fenetre;
+import java.awt.*;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 /**
  * Fenetre de selection du niveau de l'ia en mode joueur contre IA
@@ -90,34 +93,47 @@ public class EcranSelection extends JFrame implements ActionListener{
 	private void initFenetre(){
 		//Panel principal
 		panelPrincipal = new JPanel();
+		panelPrincipal.setBackground(new Color(33,36,54));
 		panelPrincipal.setPreferredSize(this.getPreferredSize());
 		panelPrincipal.setLayout(new GridBagLayout());
 		
 		//Initialisation des buttons des niveaux
 		niveau1 = new JRadioButton("Niveau 1", true);
 		niveau1.setPreferredSize(new Dimension(100, 20));
+		niveau1.setBackground(new Color(33,36,54));
+		niveau1.setForeground(new Color(255,255,255));
 		niveau1.addActionListener(this);
 		niveau2 = new JRadioButton("Niveau 2");
+		niveau2.setBackground(new Color(33,36,54));
+		niveau2.setForeground(new Color(255,255,255));
 		niveau2.setPreferredSize(new Dimension(100, 20));
 		niveau2.addActionListener(this);
 		niveau3 = new JRadioButton("Niveau 3");
+		niveau3.setForeground(new Color(255,255,255));
+		niveau3.setBackground(new Color(33,36,54));
 		niveau3.setPreferredSize(new Dimension(100, 20));
 		niveau3.addActionListener(this);
 		
 		//Initialisation des textes
 		JLabel choixNiveaux = new JLabel("Choix du niveau :");
+		choixNiveaux.setForeground(new Color(255,255,255));
 		JLabel choixCouleur = new JLabel("Choix de la couleur : ");
+		choixCouleur.setForeground(new Color(255,255,255));
 		
 		//Initialisation des buttons des couleurs
 		toggleBlanc = new JToggleButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"pion_b.png")), true);
 		toggleBlanc.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
+		toggleBlanc.setBackground(new Color(33,36,54));
 		toggleBlanc.addActionListener(this);
+
 		toggleNoir = new JToggleButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"pion_n.png")));
 		toggleNoir.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
+		toggleNoir.setBackground(new Color(33,36,54));
 		toggleNoir.addActionListener(this);
 		
 		//Initialisation boutton valider et mode debug
-		valider = new JButton("Valider");
+		valider = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"valider.png")));
+		valider.setPreferredSize(new Dimension(150, 50));
 		valider.addActionListener(this);
 	
 		

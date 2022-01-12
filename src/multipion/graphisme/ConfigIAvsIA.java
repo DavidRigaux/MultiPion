@@ -20,6 +20,9 @@ import javax.swing.SwingConstants;
 import multipion.MultiPion;
 import multipion.graphisme.jeu.Fenetre;
 import multipion.jeu.IA.ValeursEvaluation;
+import java.awt.*;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 /**
  * Fenetre de selection des IA pour un mode de jeu IA contre IA
@@ -106,7 +109,7 @@ public class ConfigIAvsIA extends JFrame implements ActionListener{
 		// Nom du panneau de configuration de IA vs IA
 		super("Configuration de l'IA vs IA");
 		this.menu = menu;
-		// Création de Position/dimension/autre pour la frame
+		// Crï¿½ation de Position/dimension/autre pour la frame
 		this.setSize(new Dimension(800, 500));
 		this.setIconImage(MultiPion.ICON);
 		this.setMinimumSize(this.getSize());
@@ -124,42 +127,71 @@ public class ConfigIAvsIA extends JFrame implements ActionListener{
 	private void initFenetre(){
 		//Conteneur general
 		conteneurGeneral = new JPanel();
+		conteneurGeneral.setBackground(new Color(33,36,54));
 		
 		//Label choix niveaux
 		choixNiveauxBlanc = new JLabel("Choix du niveau de l'IA blanc");
+		choixNiveauxBlanc.setForeground(new Color(255,255,255));
+		choixNiveauxBlanc.setFont(new Font("Lucida Fax", Font.BOLD,20));
 		choixNiveauxNoir = new JLabel("Choix du niveau de l'IA noir");
-		
+		choixNiveauxNoir.setForeground(new Color(255,255,255));
+		choixNiveauxNoir.setFont(new Font("Lucida Fax", Font.BOLD,20));
+
 		//niveaux
 		niveau1Blanc = new JRadioButton("Niveau 1", true);
+		niveau1Blanc.setBackground(new Color(33,36,54));
+		niveau1Blanc.setForeground(new Color(255,255,255));
 		niveau1Blanc.setPreferredSize(new Dimension(100, 20));
 		niveau1Blanc.addActionListener(this);
+
 		niveau2Blanc = new JRadioButton("Niveau 2");
+		niveau2Blanc.setBackground(new Color(33,36,54));
+		niveau2Blanc.setForeground(new Color(255,255,255));
 		niveau2Blanc.setPreferredSize(new Dimension(100, 20));
 		niveau2Blanc.addActionListener(this);
+
 		niveau3Blanc = new JRadioButton("Niveau 3");
 		niveau3Blanc.setPreferredSize(new Dimension(100, 20));
+		niveau3Blanc.setBackground(new Color(33,36,54));
+		niveau3Blanc.setForeground(new Color(255,255,255));
 		niveau3Blanc.addActionListener(this);
+
 		niveau1Noir = new JRadioButton("Niveau 1", true);
 		niveau1Noir.setPreferredSize(new Dimension(100, 20));
+		niveau1Noir.setBackground(new Color(33,36,54));
+		niveau1Noir.setForeground(new Color(255,255,255));
 		niveau1Noir.addActionListener(this);
+
 		niveau2Noir = new JRadioButton("Niveau 2");
 		niveau2Noir.setPreferredSize(new Dimension(100, 20));
+		niveau2Noir.setBackground(new Color(33,36,54));
+		niveau2Noir.setForeground(new Color(255,255,255));
 		niveau2Noir.addActionListener(this);
+
 		niveau3Noir = new JRadioButton("Niveau 3");
 		niveau3Noir.setPreferredSize(new Dimension(100, 20));
+		niveau3Noir.setBackground(new Color(33,36,54));
+		niveau3Noir.setForeground(new Color(255,255,255));
 		niveau3Noir.addActionListener(this);
 		
 		//Active config
 		activeConfigBlanc = new JCheckBox("Modifier les valeurs d'evaluation", false);
+		activeConfigBlanc.setBackground(new Color(33,36,54));
+		activeConfigBlanc.setForeground(new Color(255,255,255));
 		activeConfigBlanc.setHorizontalTextPosition(SwingConstants.LEFT);
 		activeConfigBlanc.addActionListener(this);
+
 		activeConfigNoir = new JCheckBox("Modifier les valeurs d'evaluation", false);
+		activeConfigNoir.setBackground(new Color(33,36,54));
+		activeConfigNoir.setForeground(new Color(255,255,255));
 		activeConfigNoir.setHorizontalTextPosition(SwingConstants.LEFT);
 		activeConfigNoir.addActionListener(this);
 		
 		//label pieces
 		piecesBlanches = new JLabel("Valeur des pieces blanches");
+		piecesBlanches.setForeground(new Color(255,255,255));
 		piecesNoires = new JLabel("Valeur des pieces noires");
+		piecesNoires.setForeground(new Color(255,255,255));
 		
 		//Label des pieces
 		pionBlanc = new JLabel("Pion");
@@ -176,16 +208,24 @@ public class ConfigIAvsIA extends JFrame implements ActionListener{
 		
 		//label des strategies
 		strategieBlanc = new JLabel("Strategie des blancs");
+		strategieBlanc.setForeground(new Color(255,255,255));
 		strategieNoir = new JLabel("Strategie des noirs");
+		strategieNoir.setForeground(new Color(255,255,255));
 		defenseBlanc = new JLabel("Defense");
+		defenseBlanc.setForeground(new Color(255,255,255));
 		dangerBlanc = new JLabel("Danger");
+		dangerBlanc.setForeground(new Color(255,255,255));
 		attaqueBlanc = new JLabel("Attaque");
+		attaqueBlanc.setForeground(new Color(255,255,255));
 		defenseNoir = new JLabel("Defense");
+		defenseNoir.setForeground(new Color(255,255,255));
 		dangerNoir = new JLabel("Danger");
+		dangerNoir.setForeground(new Color(255,255,255));
 		attaqueNoir = new JLabel("Attaque");
-		
+		attaqueNoir.setForeground(new Color(255,255,255));
 		//textfield des strategies
 		textDefenseBlanc = new JTextField();
+		
 		textDefenseBlanc.setPreferredSize(textFieldDimension);
 		textDefenseBlanc.setMargin(textInsets);
 		textDangerBlanc = new JTextField();
@@ -205,9 +245,11 @@ public class ConfigIAvsIA extends JFrame implements ActionListener{
 		textAttaqueNoir.setMargin(textInsets);
 		
 		//Boutons
-		reset = new JButton("Reset les valeurs");
+		reset = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"Reset.png")));
+		reset.setPreferredSize(new Dimension(65, 25));
 		reset.addActionListener(this);
-		valider = new JButton("Valider");
+		valider = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"valider.png")));
+		valider.setPreferredSize(new Dimension(150, 50));
 		valider.addActionListener(this);
 		
 		
@@ -430,7 +472,7 @@ public class ConfigIAvsIA extends JFrame implements ActionListener{
 		return true;
 	}
 
-	//Gère le radioButton du niveau de l'IA
+	//Gï¿½re le radioButton du niveau de l'IA
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();

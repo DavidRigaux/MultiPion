@@ -79,12 +79,12 @@ public class Fenetre extends JFrame implements ActionListener{
 	private JPanel coordOrdonnee;
 	
 	/**
-	 * Taille de la grille choix de 3 à 10 
+	 * Taille de la grille choix de 3 ï¿½ 10 
 	 */	
 	public static int taillegrille=multipion.graphisme.Menu.taillegrille;
 	
 	/**
-	 * Lettre de A à J  
+	 * Lettre de A ï¿½ J  
 	 */	
 	public char lettre='A';
 
@@ -96,7 +96,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	public Fenetre(int x, int y){
 		// nom de la JFrame
 		super("Jeu MultiPion");
-		// Créer un nouveau jeux de base donc joueur contre joueur 
+		// Crï¿½er un nouveau jeux de base donc joueur contre joueur 
 		jeu = new Jeu(this);
 		// dimension/position/autres choses utiles pour la JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,6 +107,8 @@ public class Fenetre extends JFrame implements ActionListener{
 		this.setLocation(x +100 - this.getWidth(), y+100 - this.getHeight());
 		this.setVisible(true);
 		this.setIconImage(MultiPion.ICON);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 	}
 	
 	/**
@@ -119,7 +121,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	public Fenetre(int x, int y, boolean couleur, int lvlia){
 		// nom de la JFrame
 		super("Jeu Multipion");
-		// Créer un nouveau jeux joueur vs ia et choix de la couleur et niveau de l'ia	
+		// Crï¿½er un nouveau jeux joueur vs ia et choix de la couleur et niveau de l'ia	
 		jeu = new Jeu(this, couleur, lvlia);
 		// dimension/position/autres choses utiles pour la JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,6 +132,8 @@ public class Fenetre extends JFrame implements ActionListener{
 		this.setLocation(x +100 - this.getWidth(), y+100 - this.getHeight());
 		this.setVisible(true);
 		this.setIconImage(MultiPion.ICON);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 	}
 	
 	/**
@@ -144,7 +148,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	public Fenetre(int x, int y, int niveauBlanc, int niveauNoir, ValeursEvaluation valeursBlanc, ValeursEvaluation valeursNoir){
 		// nom de la JFrame
 		super("Jeu MultiPion");
-		// Créer un nouveau jeux iavsia choix des couleurs et des niveaux des l'ia	
+		// Crï¿½er un nouveau jeux iavsia choix des couleurs et des niveaux des l'ia	
 		jeu = new Jeu(this, niveauBlanc, niveauNoir, valeursBlanc, valeursNoir);
 		// dimension/position/autres choses utiles pour la JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -155,6 +159,8 @@ public class Fenetre extends JFrame implements ActionListener{
 		this.setLocation(x - this.getWidth()/2, y - this.getHeight()/2);
 		this.setVisible(true);
 		this.setIconImage(MultiPion.ICON);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 	}
 	
 
@@ -215,7 +221,7 @@ public class Fenetre extends JFrame implements ActionListener{
 		coordAbscisse.setBackground(new Color(33,36,54));
 		coordAbscisse.setLayout(new GridLayout(1, taillegrille));
 		
-		// Lettres definissant les coordonnée du plateau
+		// Lettres definissant les coordonnï¿½e du plateau
 		if(taillegrille==3) {
 			lettre='C';
 		} else if(taillegrille==4) {
@@ -234,7 +240,7 @@ public class Fenetre extends JFrame implements ActionListener{
 			lettre='J';
 		} 
 	
-		// Créer les indications lettre du plateau
+		// Crï¿½er les indications lettre du plateau
 		for(char i = 'A'; i <= lettre; i++){
 			JLabel c = new JLabel(i+"", JLabel.CENTER);
 			c.setForeground(new Color(220,220,220));
@@ -245,7 +251,7 @@ public class Fenetre extends JFrame implements ActionListener{
 		coordOrdonnee.setBackground(new Color(33,36,54));
 		coordOrdonnee.setLayout(new GridLayout(taillegrille, 1));
 		
-		// Créer les indications chiffres du plateau
+		// Crï¿½er les indications chiffres du plateau
 		for(int i = taillegrille; i >= 1; i--){
 			JLabel c = new JLabel(i+"");
 			c.setForeground(new Color(220,220,220));
@@ -353,9 +359,9 @@ public class Fenetre extends JFrame implements ActionListener{
 	}
 	
 	/**
-	 * Fenetre de victoire : Crée la fenêtre de fin lorsque appelé
+	 * Fenetre de victoire : Crï¿½e la fenï¿½tre de fin lorsque appelï¿½
 	 * @param couleur couleur du gagnant
-	 * @param fin façon de gagner (Bloque son adversaire ou allez au bout du plateau
+	 * @param fin faï¿½on de gagner (Bloque son adversaire ou allez au bout du plateau
 	 */
 	public void Victoire(String couleur, String fin){
 		
