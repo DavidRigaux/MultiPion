@@ -31,7 +31,7 @@ import multipion.MenuGraphisme.jeu.Fenetre;
  * Menu du jeu d'echec
  * Acces au different mode de jeu
  */
-public class Menu extends JFrame implements ActionListener, MouseListener{
+public class Menu extends JFrame implements ActionListener{
 	
 	/**
 	 * Bouton un joueur
@@ -69,36 +69,6 @@ public class Menu extends JFrame implements ActionListener, MouseListener{
 	private JPanel conteneur;
 	
 	/**
-	 * Image 1
-	 */
-	private ImagePion image1;
-	
-	/**
-	 * Image 2
-	 */
-	private ImagePion image2;
-	
-	/**
-	 * Image 3
-	 */
-	private ImagePion image3;
-	
-	/**
-	 * Image 4
-	 */
-	private ImagePion image4;
-	
-	/**
-	 * Image 5
-	 */
-	private ImagePion image5;
-	
-	/**
-	 * Image 6
-	 */
-	private ImagePion image6;
-	
-	/**
 	 * Taille de la grille
 	 */
 	public static int taillegrille;
@@ -127,12 +97,10 @@ public class Menu extends JFrame implements ActionListener, MouseListener{
 		unJoueur = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"1joueur.png")));
 		unJoueur.setPreferredSize(taille);
 		unJoueur.addActionListener(this);
-		unJoueur.addMouseListener(this);
 		
 		deuxJoueurs = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"2joueur.png")));
 		deuxJoueurs.setPreferredSize(taille);
 		deuxJoueurs.addActionListener(this);
-		deuxJoueurs.addMouseListener(this);
 		
 		aPropos = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"info.png")));
 		aPropos.setBorderPainted(false);
@@ -153,22 +121,8 @@ public class Menu extends JFrame implements ActionListener, MouseListener{
 		
 		iavsia = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"ia.png")));
 		iavsia.setPreferredSize(taille);
-		iavsia.addMouseListener(this);
 		iavsia.addActionListener(this);
-		
-		//Images
-		image1 = new ImagePion(true);
-		image1.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
-		image2 = new ImagePion(true);
-		image2.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
-		image3 = new ImagePion(true);
-		image3.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
-		image4 = new ImagePion(false);
-		image4.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
-		image5 = new ImagePion(false);
-		image5.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
-		image6 = new ImagePion(false);
-		image6.setPreferredSize(new Dimension(Case.CASE_LENGTH, Case.CASE_LENGTH));
+
 		 
 		//Initialise le Jpanel principal
 		conteneur = new JPanel();
@@ -196,38 +150,6 @@ public class Menu extends JFrame implements ActionListener, MouseListener{
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.anchor = GridBagConstraints.CENTER;
 		conteneur.add(titre, gbc);
-		
-		//positionnement image 1
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridwidth = 1;
-		conteneur.add(image1, gbc);
-		
-		//positionnement image 2
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		conteneur.add(image2, gbc);
-		
-		//postitionnement image 3
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		conteneur.add(image3, gbc);
-		
-		//positionnement image 4
-		gbc.gridx = 3;
-		gbc.gridy = 1;
-		gbc.gridwidth = 1;
-		conteneur.add(image4, gbc);
-		
-		//positionnement image 5
-		gbc.gridx = 3;
-		gbc.gridy = 2;
-		conteneur.add(image5, gbc);
-		
-		//postitionnement image 6
-		gbc.gridx = 3;
-		gbc.gridy = 3;
-		conteneur.add(image6, gbc);
 		
 		//positionnement un joueur
 		gbc.gridx = 1;
@@ -354,48 +276,6 @@ public class Menu extends JFrame implements ActionListener, MouseListener{
 	
 	public void mouseReleased(MouseEvent e) {
 		
-	}
-	
-	// G�re la surbrillance des images lors du passage de la souris
-	// Active
-	public void mouseEntered(MouseEvent e) {
-		Object source = e.getSource();
-		if(source == unJoueur ){
-			image1.isHover = true;
-			image4.isHover = true;
-		}
-		
-		if( source == deuxJoueurs){
-			image2.isHover = true;
-			image5.isHover = true;
-		}
-		
-		if(source == iavsia){
-			image3.isHover = true;
-			image6.isHover = true;
-		}
-		
-		this.repaint();
-	}
-	
-	// Desactive
-	public void mouseExited(MouseEvent e) {
-		Object source = e.getSource();
-		if(source == unJoueur ){
-			image1.isHover = false;
-			image4.isHover = false;
-		}
-		
-		if( source == deuxJoueurs){
-			image2.isHover = false;
-			image5.isHover = false;
-		}
-		
-		if(source == iavsia){
-			image3.isHover = false;
-			image6.isHover = false;
-		}
-		this.repaint();
 	}
 }
 
