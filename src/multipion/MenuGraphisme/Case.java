@@ -123,7 +123,7 @@ public class Case extends JPanel{
 			char couleurFile = (couleur.equals("NOIR"))? 'n': 'b';
 			Image imgPiece = null;
 			try{
-				imgPiece = ImageIO.read(getClass().getResource(MultiPion.RES_PATH+famille.toLowerCase()+"_"+couleurFile+".png"));
+				imgPiece = ImageIO.read(getClass().getResource(MultiPion.RES_PATH+"pion_"+couleurFile+".png"));
 				imgPiece = imgPiece.getScaledInstance(500/Grille.TailleGrille, 500/Grille.TailleGrille, Image.SCALE_DEFAULT);
 				g.drawImage(imgPiece, 0, 0, this);
 			}catch(IOException e){
@@ -142,7 +142,7 @@ public class Case extends JPanel{
 			this.couleur = "";
 			this.contientPiece = false;
 		}else{
-			this.famille = p.getFamille();
+			//this.famille = p.getFamille();
 			this.couleur = p.getCouleur();
 			this.contientPiece = true;
 		}

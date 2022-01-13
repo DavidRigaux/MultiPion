@@ -55,8 +55,8 @@ public class Plateau {
 		
 		
 		for(char i = 0; i<=tailleplateau-1; i++) {
-			setCase(i, 0, new Pion(i, 0,"BLANC", this));
-			setCase(i, tailleplateau-1, new Pion(i, tailleplateau-1,"NOIR", this));
+			setCase(i, 0, new Piece(i, 0,"BLANC", this));
+			setCase(i, tailleplateau-1, new Piece(i, tailleplateau-1,"NOIR", this));
 			
 		}
 			
@@ -174,7 +174,7 @@ public class Plateau {
     	CoupSave coup = jeu.getHistorique().getDernierCoup();
     	Piece pieceDuCoup = plateau[coup.arrivee.x][coup.arrivee.y];
     	if(coup.nomPiece == ' ' && ((coup.departMemoire.y == 1 && pieceDuCoup.getCouleur().equals("BLANC")) || (coup.departMemoire.y == 6 && pieceDuCoup.getCouleur().equals("NOIR")))){
-    		Pion pionDuCoup = (Pion)pieceDuCoup;
+    		Piece pionDuCoup = (Piece)pieceDuCoup;
     		pionDuCoup.setPremierCoup(true);
     	}
     	plateau[coup.departMemoire.x][coup.departMemoire.y] = pieceDuCoup;
@@ -202,14 +202,14 @@ public class Plateau {
      * @param couleur couleur des pions
      * @return
      */
-    public ArrayList<Pion> getPions(String couleur){
+    public ArrayList<Piece> getPions(String couleur){
     	ArrayList<Piece> pieces = (couleur.equals("BLANC"))? this.getPiecesBlanches() : this.getPiecesNoires();
     	
-    	ArrayList<Pion> pions = new ArrayList<Pion>();
+    	ArrayList<Piece> pions = new ArrayList<Piece>();
     	
     	for(int i = 0; i < pieces.size(); i++){
-    		if(pieces.get(i).getClass().equals(Pion.class)){
-    			Pion p = (Pion)pieces.get(i);
+    		if(pieces.get(i).getClass().equals(Piece.class)){
+    			Piece p = (Piece)pieces.get(i);
     			pions.add(p);
     		}
     	}
@@ -228,10 +228,10 @@ public class Plateau {
 			for(int j=0; j<plateau[i].length; j++){
 				if(plateau[j][i]!= null){
 					if(plateau[j][i].getCouleur().equals("NOIR")){
-						System.out.print(plateau[j][i].getFamille().toLowerCase().charAt(0)+" ");
+						System.out.print("PION".toLowerCase().charAt(0)+" ");
 						
 					}else{
-						System.out.print(plateau[j][i].getFamille().charAt(0)+" ");
+						System.out.print("PION".charAt(0)+" ");
 						
 					}
 				}

@@ -1,18 +1,13 @@
 package multipion.jeu;
 
 import multipion.MenuGraphisme.jeu.Fenetre;
-import multipion.MenuGraphisme.jeu.Grille;
 import multipion.jeu.IA.IAThread;
 import multipion.jeu.IA.ValeursEvaluation;
 import multipion.jeu.pion.Piece;
-import multipion.jeu.pion.Pion;
 import multipion.saveDonnees.CoupSave;
 import multipion.saveDonnees.Historique;
 import multipion.utils.Coordonnee;
-
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
 
 /**
  * Class qui gere les differentes instances d'une partie d'echecs
@@ -232,9 +227,9 @@ public class Jeu{
 		int tmp =0;
 		String coul = (getJoueurCourant().getCouleur()=="BLANC") ? "NOIR" : "BLANC";
 			
-			ArrayList<Pion> pions = plateau.getPions(coul);
+			ArrayList<Piece> pions = plateau.getPions(coul);
 			System.out.print(coul);
-			for(Pion a : pions){
+			for(Piece a : pions){
 				for(int u = 0; u<tailleplateau; u++) {
 					for(int v = 0; v<tailleplateau; v++) {
 					if(a.coupPossible(u, v)==true){
@@ -336,9 +331,9 @@ public class Jeu{
 		int valeur = 1;
 		System.out.println(p);
 
-		if(p.getClass().equals(Pion.class)){
-			ArrayList<Pion> pions = plateau.getPions(p.getCouleur());
-			for(Pion a : pions){
+		if(p.getClass().equals(Piece.class)){
+			ArrayList<Piece> pions = plateau.getPions(p.getCouleur());
+			for(Piece a : pions){
 				if(a != p){
 					if(a.coupPossible(x, y) && a.mouvementPossible(x, y)){
 						if(a.getX() == p.getX()){
@@ -438,7 +433,7 @@ public class Jeu{
 	public void afficherPrises(){
 		System.out.print("Piece Prises : [");
 		for(int i=0; i<prises.size(); i++){
-			System.out.print(prises.get(i).getFamille() + ""+ prises.get(i).getCouleur()+", ");
+			System.out.print("PION "+ prises.get(i).getCouleur()+", ");
 		}
 		System.out.println("]");
 	}

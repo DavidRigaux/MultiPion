@@ -150,9 +150,7 @@ public class MinmaxValeur{
 			ArrayList<Piece> pieces = allPieces[i];
 			for(int j = 0; j < pieces.size(); j++){
 				Piece piece = pieces.get(j);
-				if(piece.getFamille().equals("PION")){
 					forceNombre[i] += valeurs.PION;
-				}
 			}
 		}
 		

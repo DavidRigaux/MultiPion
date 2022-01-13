@@ -47,7 +47,7 @@ public class PionPris extends PiecesPrises{
 				char couleurFile = (couleur.equals("NOIR"))? 'n': 'b';
 				Image imgPiece = null;
 				try{
-					imgPiece = ImageIO.read(getClass().getResource(MultiPion.RES_PATH+temp.getFamille().toLowerCase()+"_"+couleurFile+".png"));
+					imgPiece = ImageIO.read(getClass().getResource(MultiPion.RES_PATH+"pion_"+couleurFile+".png"));
 					g.drawImage(imgPiece, x, y, this);
 					x+=Case.CASE_LENGTH;
 					if(x>=Case.CASE_LENGTH * 2){
