@@ -1,10 +1,6 @@
 package multipion;
 
 import java.awt.Image;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.imageio.ImageIO;
 
 import multipion.MenuGraphisme.Menu;
@@ -20,22 +16,9 @@ public class MultiPion {
 	public static final String RES_PATH = "/res/";
 	
 	/**
-	 * Chemin des sauvegardes du jeu
-	 */
-	public static String SAVE_PATH = "";
-	
-	/**
 	 * Icone des fenetres
 	 */
 	public static Image ICON = null;
-	
-	
-	/**
-	 * Different type de log
-	 */
-	public static enum TypeLog{
-		INFO, ERREUR, WARNING
-	};
 
 	/**
 	 * Main

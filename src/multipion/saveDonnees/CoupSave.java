@@ -276,20 +276,4 @@ public class CoupSave {
 		
 	}
 	
-	/**
-	 * Return la representation en string du coup (notation PGN)
-	 * @return String
-	 */
-	public String toString(){
-		return this.formatPGN();
-	}
-	
-	/**
-	 * Reprensention en String pour du debug
-	 * @return String
-	 */
-	public String variablesToString(){
-		return "Coup "+representationString+"  "+nomPiece+" "+depart.toString()+" -> "+arrivee.toString()+" memoire:"+departMemoire.toString();
-	}
-	
 }
