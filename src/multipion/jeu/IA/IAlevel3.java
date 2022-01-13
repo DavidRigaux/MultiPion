@@ -1,6 +1,4 @@
 package multipion.jeu.IA;
-
-import multipion.MultiPion;
 import multipion.jeu.Jeu;
 import multipion.jeu.Joueur;
 import multipion.utils.Coordonnee;

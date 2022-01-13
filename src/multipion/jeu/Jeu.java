@@ -284,8 +284,7 @@ public class Jeu{
 		
 		//Deplace la piece selectionne
 		if(pieceSelectionee.deplacer(x, y)){
-			CoupSave coup = historique.getDernierCoup();
-			coup.setPrerequis(valeurPrerequis);
+
 			switchJoueur();
 			deplacementSucces = true;
 		}
@@ -293,11 +292,7 @@ public class Jeu{
 		pieceSelectionee = null;
 		fenetre.getGrille().updateGrille();
 		fenetre.getGrille().resetEtatCases();
-		if(deplacementSucces){
-			CoupSave coup = historique.getDernierCoup();
-			fenetre.getGrille().setCaseDernierCoup(coup.departMemoire.x, coup.departMemoire.y);
-			fenetre.getGrille().setCaseDernierCoup(coup.arrivee.x, coup.arrivee.y);
-		}
+
 		fenetre.repaint();
 		
 		if(!joueurBlanc.estHumain() && !joueurNoir.estHumain() && !iaThread.isReflechi() && !iaThread2.isReflechi()){
@@ -428,17 +423,6 @@ public class Jeu{
 	}
 	
 	/**
-	 * Affiche les prises dans la console
-	 */
-	public void afficherPrises(){
-		System.out.print("Piece Prises : [");
-		for(int i=0; i<prises.size(); i++){
-			System.out.print("PION "+ prises.get(i).getCouleur()+", ");
-		}
-		System.out.println("]");
-	}
-	
-	/**
 	 * Getter pour le joueurCourant
 	 * @return la reference du joueurCourant
 	 */
@@ -524,16 +508,10 @@ public class Jeu{
 	 */
 	public void fermerThreadIA(){
 		if(iaThread != null && iaThread.isAlive()){
-			if(iaThread.isReflechi()){
-				iaThread.stop();
-			}
 			iaThread.setVivant(false);
 		}
 		
 		if(iaThread2 != null && iaThread2.isAlive()){
-			if(iaThread2.isReflechi()){
-				iaThread2.stop();
-			}
 			iaThread2.setVivant(false);
 		}
 	}

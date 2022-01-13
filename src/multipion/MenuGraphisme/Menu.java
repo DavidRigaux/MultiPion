@@ -1,20 +1,13 @@
 package multipion.MenuGraphisme;
 
-
-import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Random;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -279,59 +272,3 @@ public class Menu extends JFrame implements ActionListener{
 	}
 }
 
-/**
- * Affichage d'une pes pions dans les images
- */
-class ImagePion extends JPanel{
-	
-	/**
-	 * Affichage pion
-	 */
-	private String[] pieces = {"pion" };
-	
-	/**
-	 * Couleur de la pion
-	 */
-	private char couleur;
-	
-	/**
-	 * Valeur du tirage au sort
-	 */
-	private int index;
-	
-	/**
-	 * Vrai : suppression de l'effet de transparence
-	 */
-	public boolean isHover;
-	
-	/**
-	 * Constructeur
-	 * @param isBlanc
-	 */
-	public ImagePion(boolean isBlanc){
-		super();
-		this.couleur = (isBlanc)? 'b' : 'n';
-		this.isHover = false;
-		Random rand = new Random();
-		index = rand.nextInt(pieces.length);
-	}
-	
-	@Override
-	public void paintComponent(Graphics g){
-		
-		// Gere l'affichage des pions / chargements des images
-		try{
-			float transparence = (isHover)? 1f : 0.5f;
-			Graphics2D g2d = (Graphics2D) g;
-	        g2d.setRenderingHint(
-	            RenderingHints.KEY_ANTIALIASING,
-	            RenderingHints.VALUE_ANTIALIAS_ON);
-	        g2d.setComposite(AlphaComposite.getInstance(
-	            AlphaComposite.SRC_OVER, transparence));
-			Image imgPiece = ImageIO.read(getClass().getResource(MultiPion.RES_PATH+pieces[index]+"_"+couleur+".png"));
-			g2d.drawImage(imgPiece, 0, 0, this);
-		}catch(Exception e){
-			System.out.println("Impossible de charger l'image "+getClass().getResource(MultiPion.RES_PATH+pieces[index]+"_"+couleur+".png"));
-		}
-	}
-}

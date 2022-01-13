@@ -106,12 +106,10 @@ public class IAminimax extends Joueur implements IA{
 	private void minimax(NoeudMiniMax noeudActuel, int profondeur){
 		if(profondeur >= MAX_PROFONDEUR){
 			jouerCoup(noeudActuel);
-			//if(Echecs.DEBUG) jeu.getPlateau().affiche();
-			//if(Echecs.DEBUG) System.out.println("HISTO :"+jeu.getHistorique().toStringSavePGN());
 			noeudActuel.evaluation.profondeur = profondeur;
 			noeudActuel.evaluation.evaluerPlateau();
 		}else{
-			//Joue le noeud et test si le coup jouer creer un echec
+			//Joue le noeud
 			if(jouerCoup(noeudActuel)){
 				noeudActuel.evaluation.evaluerPlateau();
 				noeudActuel.evaluation.profondeur = profondeur;
@@ -207,13 +205,10 @@ public class IAminimax extends Joueur implements IA{
 		
 		//Deplace la piece
 		if(pieceSelect.deplacer(noeud.arrivee.x, noeud.arrivee.y)){
-			CoupSave coup = jeu.getHistorique().getDernierCoup();
-			coup.setPrerequis(valeurPrerequis);
 			jeu.switchJoueur();
 			noeud.evaluation.evaluerAttaqueDefense();
 		}else{
 			jeu.getPlateau().affiche();
-			noeud.evaluation.event = MinmaxValeur.Event.ERREUR;
 			jeu.switchJoueur();
 			noeud.evaluation.evaluerAttaqueDefense();
 			return true;
@@ -268,20 +263,6 @@ class NoeudMiniMax{
 	 * Representation en String du Noeud
 	 */
 	public String toString(){
-		return "Evaluation de ["+conversionIntEnChar(depart.x)+","+(depart.y+1)+"] en ["+conversionIntEnChar(arrivee.x)+","+(arrivee.y+1)+"] = "+evaluation.toString();
-	}
-	
-	/**
-	 * Convertion d'un int en char pour les coordonnees du jeu d'echec
-	 * @param a l'int a convertir
-	 * @return le char correspondant
-	 */
-	private char conversionIntEnChar(int a){
-		int valeur = 0;
-		for(char i = 'a'; i <= 'h'; i++){
-			if(a == valeur) return i;
-			valeur++;
-		}
-		return 'Z';
+		return "Evaluation de ["+depart.x+","+(depart.y+1)+"] en ["+arrivee.x+","+(arrivee.y+1)+"] = "+evaluation.toString();
 	}
 }

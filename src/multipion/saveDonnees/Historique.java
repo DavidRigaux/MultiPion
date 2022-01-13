@@ -46,20 +46,4 @@ public class Historique{
 	public void supprimeDernierCoup(){
 		list.remove(list.size()-1);
 	}
-	
-	/**
-	 * Retourne la list sans le dernier coup
-	 */
-	public ArrayList<CoupSave> listSansDernierCoup(){
-		this.list.remove(this.list.size()-1);
-		return list;
-	}
-	
-	/**
-	 * Test si la list est vide
-	 * @return true si vide
-	 */
-	public boolean isEmpty(){
-		return list.isEmpty();
-	}
 }

@@ -29,7 +29,7 @@ public class Case extends JPanel{
 	 * Etat de la case : si elle est selectionee, que l'on peut deplacer sa piece dessus, ou rien
 	 */
 	public enum Etat{
-		RIEN, SELECTIONE, DEPLACEMENT_POSSIBLE, DERNIER_COUP
+		RIEN, SELECTIONE, DEPLACEMENT_POSSIBLE
 	};
 	
 	/**
@@ -106,10 +106,6 @@ public class Case extends JPanel{
 	        // Change la couleur des d�placement possibles (vert claire)
 	        }else if(etat.equals(Etat.DEPLACEMENT_POSSIBLE)){
 	        	select = new Color(0, 204, 0);
-	        	
-	        // Change la couleur du dernier coup ici bleu
-	        }else if(etat.equals(Etat.DERNIER_COUP)){
-	        	select = new Color(0, 0, 255);
 	        }
 	        g2d.setColor(select);
 	        g2d.fillRect(0, 0, this.getWidth(), this.getHeight());

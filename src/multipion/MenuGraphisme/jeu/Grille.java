@@ -105,23 +105,6 @@ public class Grille extends JComponent{
 		}
 	}
 	
-	/**
-	 * Marque la case comme etant le dernier coup joue
-	 * @param x position en x
-	 * @param y position en y
-	 */
-	public void setCaseDernierCoup(int x, int y){
-		Component[] contenu = this.getComponents();
-		for(int i = 0; i < contenu.length; i++){
-			if(contenu[i].getClass().equals(CaseJeu.class)){
-				CaseJeu c = (CaseJeu)contenu[i];
-				if(c.getXTableau() == x && c.getYTableau() == y){
-					c.setEtat(Case.Etat.DERNIER_COUP);
-				}
-			}
-		}
-	}
-	
 	
 	/**
 	 * Passe l'etat de toutes les Cases, correspondant aux Pieces de la liste, a DEPLACEMENT_POSSIBLE

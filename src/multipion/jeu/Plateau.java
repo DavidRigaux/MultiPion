@@ -3,7 +3,7 @@ package multipion.jeu;
 import java.util.ArrayList;
 
 import multipion.jeu.pion.Piece;
-import multipion.jeu.pion.Pion;
+
 import multipion.saveDonnees.CoupSave;
 /**
  * Classe qui va creer le plateau du jeu, elle est compose d'un tableau de Pieces 
@@ -168,15 +168,11 @@ public class Plateau {
     	return p;
     }
     
-    public void annulerDernierCoup(boolean changerDeJoueur){
-    	if(jeu.getHistorique().isEmpty()) return;
+    //permet de revenir en arriere (IA)
+   public void annulerDernierCoup(boolean changerDeJoueur){
     	
     	CoupSave coup = jeu.getHistorique().getDernierCoup();
     	Piece pieceDuCoup = plateau[coup.arrivee.x][coup.arrivee.y];
-    	if(coup.nomPiece == ' ' && ((coup.departMemoire.y == 1 && pieceDuCoup.getCouleur().equals("BLANC")) || (coup.departMemoire.y == 6 && pieceDuCoup.getCouleur().equals("NOIR")))){
-    		Piece pionDuCoup = (Piece)pieceDuCoup;
-    		pionDuCoup.setPremierCoup(true);
-    	}
     	plateau[coup.departMemoire.x][coup.departMemoire.y] = pieceDuCoup;
     	if(coup.isPrise){
     		plateau[coup.arrivee.x][coup.arrivee.y] = jeu.getPrises().get(jeu.getPrises().size()-1);

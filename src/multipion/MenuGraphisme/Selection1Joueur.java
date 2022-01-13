@@ -127,7 +127,7 @@ public class Selection1Joueur extends JFrame implements ActionListener{
 		toggleNoir.setBackground(new Color(33,36,54));
 		toggleNoir.addActionListener(this);
 		
-		//Initialisation boutton valider et mode debug
+		//Initialisation boutton valider
 		valider = new JButton(new ImageIcon(getClass().getResource(MultiPion.RES_PATH+"valider.png")));
 		valider.setPreferredSize(new Dimension(150, 50));
 		valider.addActionListener(this);
