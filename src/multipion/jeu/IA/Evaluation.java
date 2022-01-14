@@ -12,22 +12,10 @@ import multipion.jeu.pion.Piece;
 public class Evaluation{
 	
 	/**
-	 * Enum pour les differents event d'une partie d'echec
-	 */
-	public enum Event{
-		ECHEC_MAT_SUR_SOI, ECHEC_SUR_SOI, ERREUR, RIEN, ECHEC, PAT, ECHEC_MAT
-	};
-	
-	/**
 	 * Valeurs des variables d'evaluations
 	 */
 	public ValeursEvaluation valeurs;
-	
-	/**
-	 * Event de l'evaluation
-	 */
-	public Event event;
-	
+
 	/**
 	 * Profondeur auquel a ete faite l'evaluation
 	 */
@@ -47,12 +35,6 @@ public class Evaluation{
 	 * Reference du jeu
 	 */
 	private Jeu jeu;
-	
-	/**
-	 * Representation en string de l'historique joue pour cette evaluation
-	 */
-	public String historique;
-	
 	/**
 	 * Constructeur
 	 * @param jeu reference du jeu
@@ -60,7 +42,6 @@ public class Evaluation{
 	 */
 	public Evaluation(Jeu jeu, ValeursEvaluation valeurs){
 		this.jeu = jeu;
-		this.event = Event.RIEN;
 		this.valeurAttaqueDefense = 0;
 		this.valeurPlateau = 0;
 		this.profondeur = 0;
@@ -73,11 +54,6 @@ public class Evaluation{
 	 * @return la meilleur evaluation des deux
 	 */
 	public Evaluation compare(Evaluation autre){
-		if(this.event.compareTo(autre.event) > 0){
-			return this;
-		}else if(this.event.compareTo(autre.event) < 0){
-			return autre;
-		}
 			if(this.valeurAttaqueDefense + this.valeurPlateau < autre.valeurAttaqueDefense + autre.valeurPlateau){
 				return autre;
 			}else{
@@ -148,7 +124,6 @@ public class Evaluation{
 		for(int i = 0; i < allPieces.length; i++){
 			ArrayList<Piece> pieces = allPieces[i];
 			for(int j = 0; j < pieces.size(); j++){
-				Piece piece = pieces.get(j);
 					forceNombre[i] += valeurs.PION;
 			}
 		}
@@ -159,8 +134,6 @@ public class Evaluation{
 		}else{
 			this.valeurPlateau += forceNombre[0] - forceNombre[1];
 		}
-		
-		//this.historique = jeu.getHistorique().toStringSavePGN();
 	}
 	
 	/**
@@ -169,16 +142,14 @@ public class Evaluation{
 	 */
 	public void add(Evaluation add){
 		this.profondeur = add.profondeur;
-		this.event = add.event;
 		this.valeurAttaqueDefense += add.valeurAttaqueDefense;
 		this.valeurPlateau += add.valeurPlateau;
-		this.historique = add.historique;
 	}
 	
 	/**
 	 * Representation en String
 	 */
 	public String toString(){
-		return "";// "Evaluation : ["+event.toString()+"]("+this.valeurAttaqueDefense+")("+this.valeurPlateau+")";
+		return "";
 	}
 }

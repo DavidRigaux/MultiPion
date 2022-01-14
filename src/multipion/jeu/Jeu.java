@@ -4,7 +4,6 @@ import multipion.MenuGraphisme.jeu.Fenetre;
 import multipion.jeu.IA.IAThread;
 import multipion.jeu.IA.ValeursEvaluation;
 import multipion.jeu.pion.Piece;
-import multipion.saveDonnees.CoupSave;
 import multipion.saveDonnees.Historique;
 import multipion.utils.Coordonnee;
 import java.util.ArrayList;
@@ -35,17 +34,6 @@ public class Jeu{
 	 * Variable vrai si le jeu est en mode joueur vs ia ou ia vs ia
 	 */
 	private boolean vsIA;
-	
-	/**
-	 * Si le jeu est un serveur
-	 */
-	protected boolean estServeur;
-	
-	/**
-	 * Vrai si le jeu est en reseau
-	 */
-	protected boolean vsInternet;
-	
 	/**
 	 * Instance du Joueur blanc
 	 */
@@ -94,7 +82,6 @@ public class Jeu{
 		plateau = null;
 		prises = null;
 		vsIA = false;
-		vsInternet = false;
 		joueurBlanc = null;
 		joueurNoir = null;
 		joueurCourant = null;
@@ -255,7 +242,7 @@ public class Jeu{
 	 */
 	public void setPieceSelectionee(int x, int y){
 		pieceSelectionee = plateau.getCase(x, y);
-		if(joueurCourant.estHumain && !estServeur){
+		if(joueurCourant.estHumain){
 			fenetre.getGrille().ajouterDeplacementPossible(pieceSelectionee.casesPossibles());
 		}
 		

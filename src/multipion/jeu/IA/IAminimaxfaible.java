@@ -208,7 +208,6 @@ public class IAminimaxfaible extends Joueur implements IA{
 		//Deplace la piece
 		if(pieceSelect.deplacer(noeud.arrivee.x, noeud.arrivee.y)){
 			CoupSave coup = jeu.getHistorique().getDernierCoup();
-			coup.setPrerequis(valeurPrerequis);
 			jeu.switchJoueur();
 			noeud.evaluation.evaluerAttaqueDefense();
 		}else{

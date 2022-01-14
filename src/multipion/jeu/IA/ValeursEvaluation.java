@@ -15,12 +15,12 @@ public class ValeursEvaluation {
     /**
      * Valeur du malus de danger d'une piece. Dois etre negatif
      */
-    public int DANGER = -5;
+    public int DANGER = -3;
 
     /**
      * Valeur du bonus d'attaque
      */
-    public int ATTAQUE = 0;
+    public int ATTAQUE = 1;
 
     /**
      * Valeur victoire

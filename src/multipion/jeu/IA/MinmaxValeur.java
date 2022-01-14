@@ -16,7 +16,7 @@ public class MinmaxValeur{
 	 * Enum pour les differents event d'une partie d'echec
 	 */
 	public enum Event{
-		ECHEC_MAT_SUR_SOI, ECHEC_SUR_SOI, ERREUR, RIEN, ECHEC, PAT, ECHEC_MAT
+	ERREUR, RIEN
 	};
 	
 	/**
