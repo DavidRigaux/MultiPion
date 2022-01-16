@@ -37,7 +37,7 @@ public class MinmaxValeur{
 	/**
 	 * valeur du plateau pour les attaques, defenses, dangers
 	 */
-	public int valeurAttaqueDefense;
+	public int scorecoup;
 	
 	/**
 	 * valeur d'evaluation du plateau
@@ -62,7 +62,7 @@ public class MinmaxValeur{
 	public MinmaxValeur(Jeu jeu, ValeursEvaluation valeurs){
 		this.jeu = jeu;
 		this.event = Event.RIEN;
-		this.valeurAttaqueDefense = 0;
+		this.scorecoup = 0;
 		this.valeurPlateau = 0;
 		this.profondeur = 0;
 		this.valeurs = valeurs;
@@ -79,7 +79,7 @@ public class MinmaxValeur{
 		}else if(this.event.compareTo(autre.event) < 0){
 			return autre;
 		}
-			if(this.valeurAttaqueDefense + this.valeurPlateau < autre.valeurAttaqueDefense + autre.valeurPlateau){
+			if(this.scorecoup + this.valeurPlateau < autre.scorecoup + autre.valeurPlateau){
 				return autre;
 			}else{
 				return this;
@@ -108,20 +108,20 @@ public class MinmaxValeur{
 					Pion pieceAdverse = piecesAdverses.get(l);
 					//Piece en danger
 					if(pieceAdverse.coupPossible(piece.getX(), piece.getY()) && pieceAdverse.mouvementPossible(piece.getX(), piece.getY())){
-							valeurPieces[k] += valeurs.DANGER * valeurs.PION;
+							valeurPieces[k] += valeurs.DANGER;
 					}
 					
 					//Piece peut attaquer
 					if(piece.coupPossible(pieceAdverse.getX(), pieceAdverse.getY()) && piece.mouvementPossible(pieceAdverse.getX(), pieceAdverse.getY())){
-							valeurPieces[k] += valeurs.ATTAQUE * valeurs.PION;
+							valeurPieces[k] += valeurs.ATTAQUE;
 					}
 
 					if(piece.getY()==0 && piece.getCouleur()=="NOIR" || piece.getY()==Menu.taillegrille && piece.getCouleur()=="BLANC"){
-						valeurPieces[k] += valeurs.VICTOIRE * valeurs.PION;
+						valeurPieces[k] += valeurs.VICTOIRE;
 						
 					}
 					if(pieceAdverse.getY()==0 && piece.getCouleur()=="NOIR" || piece.getY()==Menu.taillegrille && piece.getCouleur()=="BLANC"){
-						valeurPieces[k] += valeurs.DEFAITE * valeurs.PION;
+						valeurPieces[k] += valeurs.DEFAITE;
 						
 					}
 				}
@@ -129,9 +129,9 @@ public class MinmaxValeur{
 		}
 	
 		if(jeu.getJoueurCourant().getCouleur().equals("BLANC")){
-			this.valeurAttaqueDefense = valeurPieces[1] - valeurPieces[0];
+			this.scorecoup = valeurPieces[1] - valeurPieces[0];
 		}else{
-			this.valeurAttaqueDefense = valeurPieces[0] - valeurPieces[1];
+			this.scorecoup = valeurPieces[0] - valeurPieces[1];
 		}
 	}
 	
@@ -171,7 +171,7 @@ public class MinmaxValeur{
 	public void add(MinmaxValeur add){
 		this.profondeur = add.profondeur;
 		this.event = add.event;
-		this.valeurAttaqueDefense += add.valeurAttaqueDefense;
+		this.scorecoup += add.scorecoup;
 		this.valeurPlateau += add.valeurPlateau;
 		this.historique = add.historique;
 	}
