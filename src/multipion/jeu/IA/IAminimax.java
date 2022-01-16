@@ -1,13 +1,10 @@
 package multipion.jeu.IA;
 
 import java.util.ArrayList;
-
-import multipion.MultiPion;
 import multipion.jeu.Jeu;
 import multipion.jeu.Joueur;
 import multipion.jeu.pion.Pion;
 import multipion.utils.Coordonnee;
-import multipion.utils.CoupSave;
 
 /**
  * Une IA qui joue selon l'algorithme du MiniMax
@@ -18,12 +15,7 @@ public class IAminimax extends Joueur implements IA{
 	/**
 	 * Profondeur maximale de descente dans l'arbre recursif
 	 */
-	private static int MAX_PROFONDEUR = 3;
-	
-	/**
-	 * Profondeur maximale de la descente dans l'arbre recursif choisis par l'utilisateur
-	 */
-	public static int MAX_PROFONDEUR_TEMP = 3;
+	private static int PROFONDEUR = 3;
 	
 	/**
 	 * Compteur du nombre d'evaluation
@@ -92,8 +84,6 @@ public class IAminimax extends Joueur implements IA{
 		//Renvoi l'evaluation max
 		NoeudMiniMax noeud = max(noeuds);
 		compteur = 0;
-		
-		MAX_PROFONDEUR = MAX_PROFONDEUR_TEMP;
 		return noeud;
 	}
 	
@@ -103,7 +93,7 @@ public class IAminimax extends Joueur implements IA{
 	 * @param profondeur profondeur actuelle dans l'arbre
 	 */
 	private void minimax(NoeudMiniMax noeudActuel, int profondeur){
-		if(profondeur >= MAX_PROFONDEUR){
+		if(profondeur >= PROFONDEUR){
 			jouerCoup(noeudActuel);
 			noeudActuel.evaluation.profondeur = profondeur;
 			noeudActuel.evaluation.evaluerPlateau();
