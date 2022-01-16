@@ -150,7 +150,7 @@ public class MinmaxValeur{
 			ArrayList<Pion> pieces = allPieces[i];
 			for(int j = 0; j < pieces.size(); j++){
 				Pion piece = pieces.get(j);
-					forceNombre[i] += valeurs.PION;
+					forceNombre[i] += 1;
 			}
 		}
 		
@@ -160,8 +160,6 @@ public class MinmaxValeur{
 		}else{
 			this.valeurPlateau += forceNombre[0] - forceNombre[1];
 		}
-		
-		//this.historique = jeu.getHistorique().toStringSavePGN();
 	}
 	
 	/**
