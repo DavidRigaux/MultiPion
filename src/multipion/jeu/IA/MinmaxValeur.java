@@ -173,11 +173,4 @@ public class MinmaxValeur{
 		this.valeurPlateau += add.valeurPlateau;
 		this.historique = add.historique;
 	}
-	
-	/**
-	 * Representation en String
-	 */
-	public String toString(){
-		return "";// "Evaluation : ["+event.toString()+"]("+this.valeurAttaqueDefense+")("+this.valeurPlateau+")";
-	}
 }
