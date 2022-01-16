@@ -2,9 +2,8 @@ package multipion.jeu;
 
 import java.util.ArrayList;
 
-import multipion.jeu.pion.Piece;
-
-import multipion.saveDonnees.CoupSave;
+import multipion.jeu.pion.Pion;
+import multipion.utils.CoupSave;
 /**
  * Classe qui va creer le plateau du jeu, elle est compose d'un tableau de Pieces 
  */
@@ -13,10 +12,10 @@ public class Plateau {
 	/**	
 	 *  Un tableau de pieces.
 	 */
-	protected Piece[][] plateau;
+	protected Pion[][] plateau;
 	
 	/**	
-	 *  récupère la taille de la grille
+	 *  rï¿½cupï¿½re la taille de la grille
 	 */
 	public int tailleplateau=multipion.MenuGraphisme.jeu.Grille.TailleGrille;
 	
@@ -38,12 +37,11 @@ public class Plateau {
 	 * Constructeur
 	 */
 	public Plateau(){
-		plateau = new Piece[tailleplateau][tailleplateau];
-		//this.setRois();
+		plateau = new Pion[tailleplateau][tailleplateau];
 	}
 	
 	/**
-	 * Mise en place des pieces sur le plateau pour une partie d'echecs
+	 * Mise en place des pieces sur le plateau
 	 */
 	public void miseEnPlacePlateau(){
 		
@@ -55,8 +53,8 @@ public class Plateau {
 		
 		
 		for(char i = 0; i<=tailleplateau-1; i++) {
-			setCase(i, 0, new Piece(i, 0,"BLANC", this));
-			setCase(i, tailleplateau-1, new Piece(i, tailleplateau-1,"NOIR", this));
+			setCase(i, 0, new Pion(i, 0,"BLANC", this));
+			setCase(i, tailleplateau-1, new Pion(i, tailleplateau-1,"NOIR", this));
 			
 		}
 			
@@ -68,7 +66,7 @@ public class Plateau {
 	 * @param y represente l'ordonnee.
 	 * @return soit la Piece contenu dans la case x,y; soit une erreur dut aux coordonnees.
 	 */
-	public Piece getCase(int x, int y){
+	public Pion getCase(int x, int y){
 		if (x < 0 || y > tailleplateau-1){
 			System.out.println("Erreur dans la coordonnee sur l'axe des abscisse : ("+x+","+y+")");
 			return null;
@@ -86,7 +84,7 @@ public class Plateau {
 	 * @param y represente l'ordonnee.
 	 * @param a est la Piece a mettre dans la case d'abscisse x et d'ordonnee y.
 	 */
-	public void setCase(int x, int y, Piece a){
+	public void setCase(int x, int y, Pion a){
 		if (x < 0 || x > tailleplateau-1){
 			System.out.println("Erreur dans la coordonnee sur l'axe des abscisse : ("+x+","+y+")"+" : "+a.toString());
 		}
@@ -99,9 +97,6 @@ public class Plateau {
 
     /**
      * Regarde si une piece est presente dans une case
-     * @param x Abscisse de la case
-     * @param y Ordonnee de la case
-     * @return Vrai si elle est vide
      */
     public boolean estVide(int x, int y){
         if(plateau[x][y] == null){
@@ -124,8 +119,8 @@ public class Plateau {
      * Recupere une liste de toutes les pieces
      * @return une liste
      */
-    public ArrayList<Piece> getPiece(){
-    	ArrayList<Piece> p = new ArrayList<Piece>();
+    public ArrayList<Pion> getPiece(){
+    	ArrayList<Pion> p = new ArrayList<Pion>();
     	for(int i=0; i<plateau.length;i++){
     		for(int j=0; j<plateau.length;j++){
     			if(this.getCase(i, j) != null){
@@ -140,8 +135,8 @@ public class Plateau {
      * Recupere une list de l'ensemble des pieces blanches
      * @return la liste
      */
-    public ArrayList<Piece> getPiecesBlanches(){
-    	ArrayList<Piece> p = new ArrayList<Piece>();
+    public ArrayList<Pion> getPiecesBlanches(){
+    	ArrayList<Pion> p = new ArrayList<Pion>();
     	for(int i=0; i<plateau.length;i++){
     		for(int j=0; j<plateau.length;j++){
     			if(this.plateau[i][j] != null && this.plateau[i][j].getCouleur().endsWith("BLANC")){
@@ -156,8 +151,8 @@ public class Plateau {
      * Recupere une list de l'ensemble des pieces noirs
      * @return la liste
      */
-    public ArrayList<Piece> getPiecesNoires(){
-    	ArrayList<Piece> p = new ArrayList<Piece>();
+    public ArrayList<Pion> getPiecesNoires(){
+    	ArrayList<Pion> p = new ArrayList<Pion>();
     	for(int i=0; i<plateau.length;i++){
     		for(int j=0; j<plateau.length;j++){
     			if(this.plateau[i][j] != null && this.plateau[i][j].getCouleur().endsWith("NOIR")){
@@ -172,7 +167,7 @@ public class Plateau {
    public void annulerDernierCoup(boolean changerDeJoueur){
     	
     	CoupSave coup = jeu.getHistorique().getDernierCoup();
-    	Piece pieceDuCoup = plateau[coup.arrivee.x][coup.arrivee.y];
+    	Pion pieceDuCoup = plateau[coup.arrivee.x][coup.arrivee.y];
     	plateau[coup.departMemoire.x][coup.departMemoire.y] = pieceDuCoup;
     	if(coup.isPrise){
     		plateau[coup.arrivee.x][coup.arrivee.y] = jeu.getPrises().get(jeu.getPrises().size()-1);
@@ -184,7 +179,7 @@ public class Plateau {
     	pieceDuCoup.setY(coup.departMemoire.y);
     	
     	if(changerDeJoueur){
-    		jeu.switchJoueur();
+    		jeu.changementjoueur();
     	}
     	jeu.getHistorique().supprimeDernierCoup();
     	if(jeu.getFenetre() != null){
@@ -198,45 +193,18 @@ public class Plateau {
      * @param couleur couleur des pions
      * @return
      */
-    public ArrayList<Piece> getPions(String couleur){
-    	ArrayList<Piece> pieces = (couleur.equals("BLANC"))? this.getPiecesBlanches() : this.getPiecesNoires();
+    public ArrayList<Pion> getPions(String couleur){
+    	ArrayList<Pion> pieces = (couleur.equals("BLANC"))? this.getPiecesBlanches() : this.getPiecesNoires();
     	
-    	ArrayList<Piece> pions = new ArrayList<Piece>();
+    	ArrayList<Pion> pions = new ArrayList<Pion>();
     	
     	for(int i = 0; i < pieces.size(); i++){
-    		if(pieces.get(i).getClass().equals(Piece.class)){
-    			Piece p = (Piece)pieces.get(i);
+    		if(pieces.get(i).getClass().equals(Pion.class)){
+    			Pion p = (Pion)pieces.get(i);
     			pions.add(p);
     		}
     	}
     	
     	return pions;
-    }
-    
-    
-    /**
-     * Affichage en String du plateau
-     */
-    public void affiche(){
-    	System.out.println("    A B C D E F G H");
-		for(int i = plateau.length-1; i >= 0; i--){
-			System.out.print((i+1)+" | ");
-			for(int j=0; j<plateau[i].length; j++){
-				if(plateau[j][i]!= null){
-					if(plateau[j][i].getCouleur().equals("NOIR")){
-						System.out.print("PION".toLowerCase().charAt(0)+" ");
-						
-					}else{
-						System.out.print("PION".charAt(0)+" ");
-						
-					}
-				}
-				else{
-					System.out.print(". ");
-				}
-			}
-			System.out.println();
-		}
-    	System.out.println("Tour du joueur : "+jeu.getJoueurCourant().getCouleur());
     }
 }	

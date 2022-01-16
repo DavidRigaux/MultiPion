@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import multipion.MultiPion;
 import multipion.MenuGraphisme.jeu.Grille;
-import multipion.jeu.pion.Piece;
+import multipion.jeu.pion.Pion;
 
 /**
  * Une case de la grille
@@ -132,7 +132,7 @@ public class Case extends JPanel{
 	 * Met a jour la case en y placant la piece passee en argument
 	 * @param p Piece a placer sur la case
 	 */
-	public void updateCase(Piece p){
+	public void updateCase(Pion p){
 		if(p == null){
 			this.famille = "";
 			this.couleur = "";

@@ -11,7 +11,7 @@ import multipion.MultiPion;
 import multipion.MenuGraphisme.Case;
 import multipion.MenuGraphisme.PiecesPrises;
 import multipion.jeu.Jeu;
-import multipion.jeu.pion.Piece;
+import multipion.jeu.pion.Pion;
 
 /**
  * Affiche les pieces prises
@@ -36,12 +36,12 @@ public class PionPris extends PiecesPrises{
 	// Affiche sur les  les prises des joueurs 
 	@Override
 	public void paintComponent(Graphics g){
-		ArrayList<Piece> priseTemp = jeu.getPrises();
+		ArrayList<Pion> priseTemp = jeu.getPrises();
 		String couleur = (priseBlanc) ? "BLANC" : "NOIR";
 		int x=0;
 		int y=0;
 		for(int i=0; i<priseTemp.size(); i++){
-			Piece temp = priseTemp.get(i);
+			Pion temp = priseTemp.get(i);
 			if(couleur.equals(priseTemp.get(i).getCouleur())){
 				//Dessine l'image de la piece
 				char couleurFile = (couleur.equals("NOIR"))? 'n': 'b';

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import multipion.MultiPion;
 import multipion.jeu.Jeu;
 import multipion.jeu.Joueur;
-import multipion.jeu.pion.Piece;
-import multipion.saveDonnees.CoupSave;
+import multipion.jeu.pion.Pion;
 import multipion.utils.Coordonnee;
+import multipion.utils.CoupSave;
 
 /**
  * Une IA qui joue selon l'algorithme du MiniMax
@@ -85,7 +85,6 @@ public class IAminimax extends Joueur implements IA{
 		
 		//Appel recursif
 		for(NoeudMiniMax noeud : noeuds){
-			long mem = compteur;
 			minimax(noeud, 1);
 			jeu.getPlateau().annulerDernierCoup(true);
 		}
@@ -163,14 +162,13 @@ public class IAminimax extends Joueur implements IA{
 	 */
 	private ArrayList<NoeudMiniMax> tousCoupsPossibles(){
 		ArrayList<NoeudMiniMax> noeuds = new ArrayList<NoeudMiniMax>();
-		ArrayList<Piece> piecesPossibles = (jeu.getJoueurCourant().getCouleur().equals("BLANC"))? jeu.getPlateau().getPiecesBlanches() : jeu.getPlateau().getPiecesNoires();
-		for(Piece piece : piecesPossibles){
+		ArrayList<Pion> piecesPossibles = (jeu.getJoueurCourant().getCouleur().equals("BLANC"))? jeu.getPlateau().getPiecesBlanches() : jeu.getPlateau().getPiecesNoires();
+		for(Pion piece : piecesPossibles){
 			ArrayList<Coordonnee> casesPossibles = piece.casesPossibles();
 			for(Coordonnee coord : casesPossibles){
 				noeuds.add(new NoeudMiniMax(piece.getX(), piece.getY(), coord.x, coord.y, jeu, valeurs));
 			}
 		}
-		System.out.println(noeuds);
 		return noeuds;
 	}
 	
@@ -199,17 +197,14 @@ public class IAminimax extends Joueur implements IA{
 	 * @return true si un event est survenu, sinon false
 	 */
 	private boolean jouerCoup(NoeudMiniMax noeud){
-		Piece pieceSelect = jeu.getPlateau().getCase(noeud.depart.x, noeud.depart.y);
-		
-		int valeurPrerequis = jeu.recherchePrerequis(pieceSelect, noeud.arrivee.x, noeud.arrivee.y);
+		Pion pieceSelect = jeu.getPlateau().getCase(noeud.depart.x, noeud.depart.y);
 		
 		//Deplace la piece
 		if(pieceSelect.deplacer(noeud.arrivee.x, noeud.arrivee.y)){
-			jeu.switchJoueur();
+			jeu.changementjoueur();
 			noeud.evaluation.evaluerAttaqueDefense();
 		}else{
-			jeu.getPlateau().affiche();
-			jeu.switchJoueur();
+			jeu.changementjoueur();
 			noeud.evaluation.evaluerAttaqueDefense();
 			return true;
 		}
@@ -245,24 +240,11 @@ class NoeudMiniMax{
 	
 	/**
 	 * Constructeur
-	 * @param xD x de la piece a bouger
-	 * @param yD y de la piece a bouger
-	 * @param xA x du deplacement de la piece
-	 * @param yA y du deplacement de la piece
-	 * @param jeu reference du jeu
-	 * @param valeurs valeurs des varibales d'evaluation
 	 */
 	public NoeudMiniMax(int xD, int yD, int xA, int yA, Jeu jeu, ValeursEvaluation valeurs){
 		depart = new Coordonnee(xD, yD);
 		arrivee = new Coordonnee(xA, yA);
 		evaluation = new MinmaxValeur(jeu, valeurs);
 		IAminimax.compteur++;
-	}
-	
-	/**
-	 * Representation en String du Noeud
-	 */
-	public String toString(){
-		return "Evaluation de ["+depart.x+","+(depart.y+1)+"] en ["+arrivee.x+","+(arrivee.y+1)+"] = "+evaluation.toString();
 	}
 }

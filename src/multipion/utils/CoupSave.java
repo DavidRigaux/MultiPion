@@ -1,7 +1,6 @@
-package multipion.saveDonnees;
+package multipion.utils;
 
-import multipion.jeu.pion.Piece;
-import multipion.utils.Coordonnee;
+import multipion.jeu.pion.Pion;
 
 public class CoupSave {
 	/**
@@ -33,7 +32,7 @@ public class CoupSave {
 	/**
 	 * Reference de la piece joue
 	 */
-	public Piece referencePiece;
+	public Pion referencePiece;
 	
 	/**
 	 * Constructeur

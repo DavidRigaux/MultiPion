@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import multipion.MultiPion;
 import multipion.jeu.Jeu;
 import multipion.jeu.Joueur;
-import multipion.jeu.pion.Piece;
-import multipion.saveDonnees.CoupSave;
+import multipion.jeu.pion.Pion;
 import multipion.utils.Coordonnee;
+import multipion.utils.CoupSave;
 
 /**
  * Une IA qui joue selon l'algorithme du MiniMax
@@ -106,8 +106,6 @@ public class IAminimaxfaible extends Joueur implements IA{
 	private void minimax(NoeudMiniMax noeudActuel, int profondeur){
 		if(profondeur >= MAX_PROFONDEUR){
 			jouerCoup(noeudActuel);
-			//if(Echecs.DEBUG) jeu.getPlateau().affiche();
-			//if(Echecs.DEBUG) System.out.println("HISTO :"+jeu.getHistorique().toStringSavePGN());
 			noeudActuel.evaluation.profondeur = profondeur;
 			noeudActuel.evaluation.evaluerPlateau();
 		}else{
@@ -165,14 +163,13 @@ public class IAminimaxfaible extends Joueur implements IA{
 	 */
 	private ArrayList<NoeudMiniMax> tousCoupsPossibles(){
 		ArrayList<NoeudMiniMax> noeuds = new ArrayList<NoeudMiniMax>();
-		ArrayList<Piece> piecesPossibles = (jeu.getJoueurCourant().getCouleur().equals("BLANC"))? jeu.getPlateau().getPiecesBlanches() : jeu.getPlateau().getPiecesNoires();
-		for(Piece piece : piecesPossibles){
+		ArrayList<Pion> piecesPossibles = (jeu.getJoueurCourant().getCouleur().equals("BLANC"))? jeu.getPlateau().getPiecesBlanches() : jeu.getPlateau().getPiecesNoires();
+		for(Pion piece : piecesPossibles){
 			ArrayList<Coordonnee> casesPossibles = piece.casesPossibles();
 			for(Coordonnee coord : casesPossibles){
 				noeuds.add(new NoeudMiniMax(piece.getX(), piece.getY(), coord.x, coord.y, jeu, valeurs));
 			}
 		}
-		System.out.println(noeuds);
 		return noeuds;
 	}
 	
@@ -201,19 +198,16 @@ public class IAminimaxfaible extends Joueur implements IA{
 	 * @return true si un event est survenu, sinon false
 	 */
 	private boolean jouerCoup(NoeudMiniMax noeud){
-		Piece pieceSelect = jeu.getPlateau().getCase(noeud.depart.x, noeud.depart.y);
-		
-		int valeurPrerequis = jeu.recherchePrerequis(pieceSelect, noeud.arrivee.x, noeud.arrivee.y);
+		Pion pieceSelect = jeu.getPlateau().getCase(noeud.depart.x, noeud.depart.y);
 		
 		//Deplace la piece
 		if(pieceSelect.deplacer(noeud.arrivee.x, noeud.arrivee.y)){
 			CoupSave coup = jeu.getHistorique().getDernierCoup();
-			jeu.switchJoueur();
+			jeu.changementjoueur();
 			noeud.evaluation.evaluerAttaqueDefense();
 		}else{
-			jeu.getPlateau().affiche();
 			noeud.evaluation.event = MinmaxValeur.Event.ERREUR;
-			jeu.switchJoueur();
+			jeu.changementjoueur();
 			noeud.evaluation.evaluerAttaqueDefense();
 			return true;
 		}
@@ -267,20 +261,6 @@ class NoeudMiniMaxfaible{
 	 * Representation en String du Noeud
 	 */
 	public String toString(){
-		return "Evaluation de ["+conversionIntEnChar(depart.x)+","+(depart.y+1)+"] en ["+conversionIntEnChar(arrivee.x)+","+(arrivee.y+1)+"] = "+evaluation.toString();
-	}
-	
-	/**
-	 * Convertion d'un int en char pour les coordonnees du jeu d'echec
-	 * @param a l'int a convertir
-	 * @return le char correspondant
-	 */
-	private char conversionIntEnChar(int a){
-		int valeur = 0;
-		for(char i = 'a'; i <= 'h'; i++){
-			if(a == valeur) return i;
-			valeur++;
-		}
-		return 'Z';
+		return "Evaluation de ["+depart.x+","+(depart.y+1)+"] en ["+arrivee.x+","+(arrivee.y+1)+"] = "+evaluation.toString();
 	}
 }

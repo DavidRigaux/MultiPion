@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import multipion.MultiPion;
 import multipion.jeu.Jeu;
 import multipion.jeu.Joueur;
-import multipion.jeu.pion.Piece;
+import multipion.jeu.pion.Pion;
 import multipion.utils.Coordonnee;
 
 /**
@@ -40,13 +40,13 @@ public class IAaleatoire extends Joueur implements IA{
 		this.coordonneeAJouer = null;
 		
 		//Recupere toutes les pieces de la couleurs de l'ia
-		ArrayList<Piece> pieces = (this.getCouleur().equals("BLANC"))? jeu.getPlateau().getPiecesBlanches() : jeu.getPlateau().getPiecesNoires();
+		ArrayList<Pion> pieces = (this.getCouleur().equals("BLANC"))? jeu.getPlateau().getPiecesBlanches() : jeu.getPlateau().getPiecesNoires();
 		
 		// Initialisation des param�tres
 		boolean tourcoupIA = true;
 		int x = -1;
 		int y = -1;
-		Piece pieceABouger = null;
+		Pion pieceABouger = null;
 		
 		// Fait jouer l'IA uniquement si la fin == false
 		if(multipion.jeu.Jeu.fin==false) {

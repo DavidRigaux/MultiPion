@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import multipion.MenuGraphisme.Menu;
 import multipion.MenuGraphisme.jeu.Grille;
 import multipion.jeu.Jeu;
-import multipion.jeu.pion.Piece;
+import multipion.jeu.pion.Pion;
 
 /**
  * Evalue un plateau de jeu ou un coup pour l'algorithme minimax
@@ -13,7 +13,7 @@ import multipion.jeu.pion.Piece;
 public class MinmaxValeur{
 	
 	/**
-	 * Enum pour les differents event d'une partie d'echec
+	 * Enum pour les differents event d'une partie
 	 */
 	public enum Event{
 	ERREUR, RIEN
@@ -91,21 +91,21 @@ public class MinmaxValeur{
 	 * Evalue le jeu selon le nombres d'attaques, defense et mise en danger de chaque piece
 	 */
 	public void evaluerAttaqueDefense(){
-		ArrayList<Piece>[] allPieces = new ArrayList[2];
+		ArrayList<Pion>[] allPieces = new ArrayList[2];
 		allPieces[0] = jeu.getPlateau().getPiecesBlanches();
 		allPieces[1] = jeu.getPlateau().getPiecesNoires();
 		
 		int[] valeurPieces = new int[2];
 		
 		for(int k = 0; k < allPieces.length; k++){
-			ArrayList<Piece> pieces = allPieces[k];
+			ArrayList<Pion> pieces = allPieces[k];
 			for(int i = 0; i < pieces.size(); i++){
-				Piece piece = pieces.get(i);
+				Pion piece = pieces.get(i);
 				//Attaque et danger de la piece
 				int k1 = (k == 0)? 1 : 0;
-				ArrayList<Piece> piecesAdverses = allPieces[k1];
+				ArrayList<Pion> piecesAdverses = allPieces[k1];
 				for(int l = 0; l < piecesAdverses.size(); l++){
-					Piece pieceAdverse = piecesAdverses.get(l);
+					Pion pieceAdverse = piecesAdverses.get(l);
 					//Piece en danger
 					if(pieceAdverse.coupPossible(piece.getX(), piece.getY()) && pieceAdverse.mouvementPossible(piece.getX(), piece.getY())){
 							valeurPieces[k] += valeurs.DANGER * valeurs.PION;
@@ -140,16 +140,16 @@ public class MinmaxValeur{
 	 */
 	public void evaluerPlateau(){
 		//Evaluation du nombre de piece
-		ArrayList<Piece>[] allPieces = new ArrayList[2];
+		ArrayList<Pion>[] allPieces = new ArrayList[2];
 		allPieces[0] = jeu.getPlateau().getPiecesBlanches();
 		allPieces[1] = jeu.getPlateau().getPiecesNoires();
 		
 		int[] forceNombre = new int[2];
 		
 		for(int i = 0; i < allPieces.length; i++){
-			ArrayList<Piece> pieces = allPieces[i];
+			ArrayList<Pion> pieces = allPieces[i];
 			for(int j = 0; j < pieces.size(); j++){
-				Piece piece = pieces.get(j);
+				Pion piece = pieces.get(j);
 					forceNombre[i] += valeurs.PION;
 			}
 		}

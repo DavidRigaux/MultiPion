@@ -76,7 +76,7 @@ public class IAThread extends Thread{
 	@Override
 	public void run(){
 
-		System.out.println("Début tour Ia");
+		System.out.println("Debut tour Ia");
 		while(vivant){
 			checkPause();
 			if(!vivant) break;

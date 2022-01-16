@@ -3,13 +3,14 @@ package multipion.jeu;
 import multipion.MenuGraphisme.jeu.Fenetre;
 import multipion.jeu.IA.IAThread;
 import multipion.jeu.IA.ValeursEvaluation;
-import multipion.jeu.pion.Piece;
-import multipion.saveDonnees.Historique;
+import multipion.jeu.pion.Pion;
 import multipion.utils.Coordonnee;
+import multipion.utils.Historique;
+
 import java.util.ArrayList;
 
 /**
- * Class qui gere les differentes instances d'une partie d'echecs
+ * instancie une partie
  */
 public class Jeu{
 	
@@ -28,7 +29,7 @@ public class Jeu{
 	/**
 	 * Liste des pieces prises
 	 */
-	protected ArrayList<Piece> prises;
+	protected ArrayList<Pion> prises;
 	
 	/**
 	 * Variable vrai si le jeu est en mode joueur vs ia ou ia vs ia
@@ -62,7 +63,7 @@ public class Jeu{
 	/**
 	 * Instance de la piece selectionnee par le joueur
 	 */
-	protected Piece pieceSelectionee;
+	protected Pion pieceSelectionee;
 	
 	/**
 	 * Liste de l'historique des coups
@@ -100,7 +101,7 @@ public class Jeu{
 	public Jeu(Fenetre fenetre){
 		super();
 		this.plateau = new Plateau(this);
-		this.prises = new ArrayList<Piece>();
+		this.prises = new ArrayList<Pion>();
 		joueurBlanc = new Joueur("BLANC");
 		joueurNoir = new Joueur("NOIR");
 		joueurCourant = joueurBlanc;
@@ -138,7 +139,7 @@ public class Jeu{
 		historique = new Historique();
 		this.fenetre = fenetre;
 		this.plateau = new Plateau(this);
-		this.prises = new ArrayList<Piece>();
+		this.prises = new ArrayList<Pion>();
 		vsIA = true;
 		plateau.miseEnPlacePlateau();
 		fin=false;
@@ -159,8 +160,8 @@ public class Jeu{
 		joueurNoir = new Joueur("NOIR");
 		joueurNoir.setHumain(false);
 		
-		iaThread = new IAThread(niveauBlanc, "BLANC", this, valeursBlanc);
-		iaThread2 = new IAThread(niveauNoir, "NOIR", this, valeursNoir);
+		iaThread = new IAThread(niveauBlanc, "BLANC", this, new ValeursEvaluation());
+		iaThread2 = new IAThread(niveauNoir, "NOIR", this, new ValeursEvaluation());
 		
 		iaThread.pause(true);
 		iaThread2.pause(true);
@@ -171,7 +172,7 @@ public class Jeu{
 		historique = new Historique();
 		this.fenetre = fenetre;
 		this.plateau = new Plateau(this);
-		this.prises = new ArrayList<Piece>();
+		this.prises = new ArrayList<Pion>();
 		this.vsIA = true;
 		plateau.miseEnPlacePlateau();
 		fin=false;
@@ -214,9 +215,8 @@ public class Jeu{
 		int tmp =0;
 		String coul = (getJoueurCourant().getCouleur()=="BLANC") ? "NOIR" : "BLANC";
 			
-			ArrayList<Piece> pions = plateau.getPions(coul);
-			System.out.print(coul);
-			for(Piece a : pions){
+			ArrayList<Pion> pions = plateau.getPions(coul);
+			for(Pion a : pions){
 				for(int u = 0; u<tailleplateau; u++) {
 					for(int v = 0; v<tailleplateau; v++) {
 					if(a.coupPossible(u, v)==true){
@@ -224,10 +224,8 @@ public class Jeu{
 					}else {	
 					}	
 			}}}
-			System.out.print(tmp);
 			if(tmp==0) {
 				fin=true;
-				System.out.print(coul+" est bloquer");
 				plateau.getJeu().getFenetre().Victoire(getJoueurCourant().getCouleur(),"en bloquant votre adversaire.");
 			}}
 		}
@@ -267,12 +265,12 @@ public class Jeu{
 	public void deplacerPiece(int x, int y){
 		boolean deplacementSucces = false;
 		
-		int valeurPrerequis = recherchePrerequis(pieceSelectionee, x, y);
+		int valeurPrerequis = prerequis(pieceSelectionee, x, y);
 		
 		//Deplace la piece selectionne
 		if(pieceSelectionee.deplacer(x, y)){
 
-			switchJoueur();
+			changementjoueur();
 			deplacementSucces = true;
 		}
 		
@@ -309,13 +307,12 @@ public class Jeu{
 	 * @param y deplacement de la piece en y
 	 * @return un code de la valeur de prerequis
 	 */
-	public int recherchePrerequis(Piece p, int x, int y){
+	public int prerequis(Pion p, int x, int y){
 		int valeur = 1;
-		System.out.println(p);
 
-		if(p.getClass().equals(Piece.class)){
-			ArrayList<Piece> pions = plateau.getPions(p.getCouleur());
-			for(Piece a : pions){
+		if(p.getClass().equals(Pion.class)){
+			ArrayList<Pion> pions = plateau.getPions(p.getCouleur());
+			for(Pion a : pions){
 				if(a != p){
 					if(a.coupPossible(x, y) && a.mouvementPossible(x, y)){
 						if(a.getX() == p.getX()){
@@ -375,7 +372,7 @@ public class Jeu{
 		
 		joueurCourant = joueurBlanc;
         plateau = new Plateau(this);
-        prises = new ArrayList<Piece>();
+        prises = new ArrayList<Pion>();
 		historique = new Historique();
 		pieceSelectionee = null;
 		
@@ -390,13 +387,13 @@ public class Jeu{
 	/**
 	 * Change le joueur courant (Si c'etait le joueur blanc, joueurCourant devient le joueur noir) egalement verifie si bloquer
 	 */
-	public void switchJoueur(){
+	public void changementjoueur(){
 		testBloque();
 		joueurCourant = (joueurCourant == joueurBlanc)? joueurNoir : joueurBlanc;
 		
 	}
 	
-	public void switchJoueuriA(){
+	public void changementjoueuriA(){
 		joueurCourant = (joueurCourant == joueurBlanc)? joueurNoir : joueurBlanc;
 		
 	}
@@ -461,7 +458,7 @@ public class Jeu{
 	 * Getter des pieces prises
 	 * @return ArrayList<Piece>
 	 */
-	public ArrayList<Piece> getPrises(){
+	public ArrayList<Pion> getPrises(){
 		return this.prises;
 	}
 	

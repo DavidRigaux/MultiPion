@@ -30,7 +30,7 @@ public class MultiPion {
     	try{
 			ICON = ImageIO.read(MultiPion.class.getResource(MultiPion.RES_PATH+"logo.png"));
 		}catch(Exception e){
-			System.out.println("Impossible de charger l'image "+MultiPion.class.getResource(MultiPion.RES_PATH+"logo.png"));
+			System.out.println("Impossible de charger l'image du logo");
 		}
     	
     	new Menu();

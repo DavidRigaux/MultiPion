@@ -14,7 +14,7 @@ import multipion.utils.Coordonnee;
 
 
 /**
- * Conteneur qui contient toutes les cases du jeu d'echecs a afficher
+ * Conteneur qui contient toutes les cases du jeu
  * @see Case
  */
 public class Grille extends JComponent{

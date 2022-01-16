@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import multipion.jeu.Jeu;
 import multipion.jeu.Plateau;
-import multipion.saveDonnees.CoupSave;
 import multipion.utils.Coordonnee;
+import multipion.utils.CoupSave;
 
 /**
  * Classe mere des differentes pieces
  */
-public class Piece {
+public class Pion {
     /**
      * Reference au plateau
      */
@@ -32,7 +32,7 @@ public class Piece {
      * @param y La position en ordonnee
      * @param couleur La couleur de la piece
      */
-    public Piece(int x, int y, String couleur, Plateau plateau){
+    public Pion(int x, int y, String couleur, Plateau plateau){
     	this.x = x;
     	this.y = y;
     	this.couleur = couleur;
@@ -111,7 +111,7 @@ public class Piece {
 	            }
 	            
 	            //on test son premier coup
-	            	Piece p = (Piece) this;
+	            	Pion p = (Pion) this;
 	            	p.setPremierCoup(false);
 	            //Deplacement de la piece
 	        	plateau.setCase(this.x, this.y, null);

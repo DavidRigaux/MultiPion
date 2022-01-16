@@ -7,9 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +18,7 @@ import java.awt.*;
 import multipion.MultiPion;
 import multipion.MenuGraphisme.jeu.Fenetre;
 /**
- * Menu du jeu d'echec
+ * Menu du jeu
  * Acces au different mode de jeu
  */
 public class Menu extends JFrame implements ActionListener{
